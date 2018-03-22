@@ -1,65 +1,124 @@
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import Person;
+import Adult;
+import Child;
+import Infant;
 
 public class Driver {
     private static Scanner input = new Scanner(System.in);
-    // private static Person selectedPerson = null; // TODO - import Person class
+    private static ArrayList<Person> people = new ArrayList<Person>();
+    private static Person selectedPerson = null;
 
     public static void main(String args[]) {
 
     }
 
-    public static void start() {
+    public static void start(ArrayList<Person> loadedPeople) {
+        people = loadedPeople;
+
         while(startMenu());
 
         end();
+
+
     }
 
-    public static void end() {
+    private static void end() {
         // Run any required cleanup
         input.close();
     }
 
-    public static char getMenuInput(){
+    private static int getMenuInput(){
 
         // Get the first character from user input
         String line = input.next();
         input.nextLine();
-        char selection = line.charAt(0);
+        int selection = -1;
+
+        try {
+            selection = Integer.parseInt(line);
+        } catch (NumberFormatException e) {
+            System.out.println("Please enter a valid number selection");
+        }
 
         return selection;
     }
 
-    public static Boolean startMenu() {        
+    private static Boolean startMenu() {        
         System.out.println("Select from the menu: ");
         System.out.println("1. Create a new person");
         System.out.println("2. Select person from network");
-        System.out.println("x. Quit MiniNet");
+        System.out.println("0. Quit MiniNet");
 
-        char selection = getMenuInput();
+        int selection = getMenuInput();
 
         switch (selection) {
-            case '1':
+            case 1:
                 System.out.println("Create a person");
                 inputPersonDetails();
                 break;
-            case '2':
-                System.out.println("Case 2");
+            case 2:
+                System.out.println("Printing People List");
+                printUsers(people);
+
+                System.out.println("Select a user ID: ");
+                int selectedUserId = getMenuInput();
+                if(selectedUserId < 1) {
+                    System.out.println("Please select a valid user ID");
+                } else {
+                    while(selectedPersonMenu(selectedUserId));
+                }
+
                 break;
-            case 'x':
+            case 0:
                 System.out.println("Exiting");
                 return false;
             default:
-                System.out.println("Default Case, please select valud input");
+                System.out.println("Default Case, please select valid input");
         }
 
         return true;
     }
 
-    private static void selectedPersonMenu(){
+    private static Boolean selectedPersonMenu(int userId) {
+        selectedPerson = people.get(userId);
 
+        System.out.println("Selected Person: " + selectedPerson.getFullName() + "\n");
+
+        System.out.println("Select from the menu: ");
+        System.out.println("1. Print full user details");
+        System.out.println("2. Add a friend");
+        System.out.println("3. List friends");
+        System.out.println("0. Go Back");
+
+        int selection = getMenuInput();
+
+        switch (selection) {
+            case 1:
+                printUser(selectedPerson, true);
+                break;
+            case 2:
+                System.out.println("TODO - Add Friend");
+                // TODO - addFriend method
+                break;
+            case 3:
+                System.out.println("TODO - Print list of users friends");
+                // printUsers(selectedPerson.getFriends()); // TODO - implement getFriends();
+                return true;
+                break;
+            case 0:
+                System.out.println(); // Print empty line for readability
+                return false;
+            default:
+                System.out.println("Default Case, please select valid input");
+        }
+
+        return true;
     }
 
-    public static void inputPersonDetails(){
+    private static void inputPersonDetails(){
         System.out.print("What is your first name? ");
         String firstName = input.nextLine(); // TODO - add validation firstName must exist
 
@@ -84,6 +143,45 @@ public class Driver {
         String status = input.nextLine();
         
         // TODO - create Person and add to Array
+    }
+
+    private static void printUsers(ArrayList<Person> peopleList) {
+        System.out.format(
+            "%4s%20s%4s\n",
+            "User ID",
+            "User Name",
+            "Age"
+        );
+        // TODO - make this more robust for displaying large lists
+        for (Person person: peopleList) {
+            printUser(person, true);
+        }
+    }
+
+    private static void printUser(Person person, Boolean fullDetails) {
+        if(fullDetails) {
+            System.out.println("User ID: " + person.getID());
+            System.out.println("First Name: " + person.getFirstName());
+            System.out.println("Last Name: " + person.getLastName());
+            System.out.println("Age: " + person.getAge());
+            
+            String userStatus = person.getStatus();
+            if(userStatus != null) {
+                System.out.println("User Status: " + userStatus);
+            }
+
+            System.out.println(); // Print empty line for readability
+
+        } else {
+            System.out.format(
+                "%4d%20s%4d\n",
+                person.getID(),
+                person.getFullName(),
+                person.getAge()
+            );
+        }
+                
+
     }
 }
 
