@@ -8,9 +8,14 @@ public class Adult extends Person implements Friendable{
 	private int partner; // !!! how to make this optional? Or doesn't matter if not used in every instance? !!!
 
 
-	// constructor
+	// constructor for mandatory fields
 	Adult(String firstName, String lastName, String dob, String password){
 		super(firstName, lastName, dob, password);
+	}
+
+	// overlaoded constructor to include image
+	Adult(String firstName, String lastName, String dob, String password, String image){
+		super(firstName, lastName, dob, password, image);
 	}
 
 	// getter

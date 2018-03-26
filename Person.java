@@ -4,7 +4,7 @@ public abstract class Person{
 	// variables
 	private String userFirstName;
 	private String userLastName;
-	// private ??? userImage;
+	private String userImage;
 	private String userStatus;
 	private int userAge;	// !!! should this be a class variable, or simply a function variable when the age is asked for? !!!
 	private String dob;
@@ -12,14 +12,25 @@ public abstract class Person{
 	private final int USER_ID;
 	private String userPassword;
 
-	// constructor !!! need to update to include args (see class diagram)
-	Person(String firstName, String lastName, String dob, String password){   // !!! encapsulation for abstract constructor !!!
+	// constructor for mandatory fields
+	public Person(String firstName, String lastName, String dob, String password){
 		userFirstName = firstName;
 		userLastName = lastName;
 		this.dob = dob;
 		userPassword = password;
 		USER_ID = ++PROFILE_COUNT;   // increment PROFILE_COUNT and assign to USER_ID (first USER_ID = 1)
 	}
+
+	// constructor overloaded for image
+	public Person(String firstName, String lastName, String dob, String password, String image){
+		userFirstName = firstName;
+		userLastName = lastName;
+		this.dob = dob;
+		userPassword = password;
+		userImage = image;
+		USER_ID = ++PROFILE_COUNT;   // increment PROFILE_COUNT and assign to USER_ID (first USER_ID = 1)
+	}
+
 
 	// getters
 	public String getFirstName(){
@@ -30,9 +41,9 @@ public abstract class Person{
 		return userLastName;
 	}
 
-	// public ??? getImage(){
-	//	return userImage;
-	// } 
+	public String getImage(){
+		return userImage;
+	} 
 
 	public String getStatus(){
 		return userStatus;
@@ -77,7 +88,9 @@ public abstract class Person{
 		userLastName = lastName;
 	}
 
-	// !!! public void updateImage !!! ?????
+	public void updateImage(String image){
+		userImage = image;
+	}
 
 	// receives args from Driver.inputStatus()
 	public void updateStatus(String status){

@@ -2,7 +2,7 @@ import java.util.Scanner;
 import java.io.*;
 
 // TODO - import Person class
-import Driver;
+// import Driver;  Don't need to import if it's in the same package.
 
 public class MiniNet {
     public static void main(String args[]){
