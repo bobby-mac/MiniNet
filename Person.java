@@ -67,7 +67,7 @@ public abstract class Person{
 		return USER_ID;
 	}
 
-	private String getPassword(){
+	public String getPassword(){
 		return userPassword;
 	}
 

@@ -4,30 +4,33 @@ import java.time.format.DateTimeFormatter;
 public class Test{
 	
 	public static void main(String[] args){
-		//Person test1 = new Person();
-		//Person test2 = new Person();
-		LocalDate date1 = LocalDate.parse("19501225", DateTimeFormatter.BASIC_ISO_DATE);
-		Adult test3 = new Adult("Adam", "Smith", date1, "secret_word");
+		
+		// test adult 1
+		LocalDate date1 = LocalDate.parse("19720818", DateTimeFormatter.BASIC_ISO_DATE);
+		Adult test1 = new Adult("Jack", "Stalk", date1, "bad_password");
+		
+		// test adult 2
+		LocalDate date2 = LocalDate.parse("19550413", DateTimeFormatter.BASIC_ISO_DATE);
+		Adult test2 = new Adult("Mary", "Scotts", date2, "secret_word");
 
-		//System.out.println(test1.getID());
-		//System.out.println(test2.getID());
-		System.out.println(test3.getID());
+		// test adult 3
+		LocalDate date3 = LocalDate.parse("19501225", DateTimeFormatter.BASIC_ISO_DATE);
+		Adult test3 = new Adult("Adam", "Smith", date3, "secret_word");
 
-		System.out.println(test3.getFirstName());
-		System.out.println(test3.getLastName());
+		
+		test3.addFriend(test1.getID());
+		test3.addFriend(test2.getID());
 
-		System.out.println("Age is " + test3.getAge());
-		System.out.println("DOB is " + test3.getDOB());
+		Log.addProfile(test1);
+		Log.addProfile(test2);
+		Log.addProfile(test3);
 
-		test3.addFriend(7);
-		test3.addFriend(9);
-		System.out.println(test3.getFriends());
+		System.out.println(Log.profiles.get(1).getFirstName());
 
-		test3.removeFriend(7);
-		System.out.println(test3.getFriends());
 
-		test3.addDependent(11);
-		System.out.println(test3.getDependents());
+
+		// test Log class
+		//System.out.println(Log.adultProfileString(test3));
 
 
 		
