@@ -1,4 +1,7 @@
 import java.util.*;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 
 public abstract class Person{
 	// variables
@@ -7,13 +10,13 @@ public abstract class Person{
 	private String userImage;
 	private String userStatus;
 	private int userAge;	// !!! should this be a class variable, or simply a function variable when the age is asked for? !!!
-	private String dob;
+	private LocalDate dob;
 	public static int PROFILE_COUNT = 0;   // static variable to use as counter for unique USER_ID
 	private final int USER_ID;
 	private String userPassword;
 
 	// constructor for mandatory fields
-	public Person(String firstName, String lastName, String dob, String password){
+	public Person(String firstName, String lastName, LocalDate dob, String password){
 		userFirstName = firstName;
 		userLastName = lastName;
 		this.dob = dob;
@@ -22,7 +25,7 @@ public abstract class Person{
 	}
 
 	// constructor overloaded for image
-	public Person(String firstName, String lastName, String dob, String password, String image){
+	public Person(String firstName, String lastName, LocalDate dob, String password, String image){
 		userFirstName = firstName;
 		userLastName = lastName;
 		this.dob = dob;
@@ -49,8 +52,14 @@ public abstract class Person{
 		return userStatus;
 	}
 
+	public String getDOB(){
+		DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+		String date = dob.format(dateFormatter);
+		return date;
+	}
+
 	public int getAge(){
-		// !!! need to calculate age. Take dob as arg (update class diagram accordingly)
+		updateAge();
 		return userAge;
 	}
 
@@ -82,7 +91,6 @@ public abstract class Person{
 
 	// setters
 
-	// receives args from Driver.inputName()
 	public void updateName(String firstName, String lastName){
 		userFirstName = firstName;
 		userLastName = lastName;
@@ -92,15 +100,18 @@ public abstract class Person{
 		userImage = image;
 	}
 
-	// receives args from Driver.inputStatus()
 	public void updateStatus(String status){
 		userStatus = status;
 	}
 
-	// receives args from Driver.inputDOB()
-	public void updateDOB(String dateOfBirth){
+	public void updateDOB(LocalDate dateOfBirth){
 		dob = dateOfBirth;
-	}	
+	}
+
+	public void updateAge(){
+		Period yearsOld = Period.between(dob, LocalDate.now());
+		userAge = yearsOld.getYears();
+	}
 	
 	// receives args from Driver.inputPassword()
 	public void updatePassword(String newPassword){

@@ -1,4 +1,5 @@
 import java.util.*;
+import java.time.LocalDate;
 
 public class Adult extends Person implements Friendable{
 
@@ -9,12 +10,12 @@ public class Adult extends Person implements Friendable{
 
 
 	// constructor for mandatory fields
-	Adult(String firstName, String lastName, String dob, String password){
+	Adult(String firstName, String lastName, LocalDate dob, String password){
 		super(firstName, lastName, dob, password);
 	}
 
 	// overlaoded constructor to include image
-	Adult(String firstName, String lastName, String dob, String password, String image){
+	Adult(String firstName, String lastName, LocalDate dob, String password, String image){
 		super(firstName, lastName, dob, password, image);
 	}
 
