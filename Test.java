@@ -25,8 +25,36 @@ public class Test{
 		Log.addProfile(test2);
 		Log.addProfile(test3);
 
+		int j = Log.profiles.size();
+		System.out.println("Number of profiles: " + j);
+
 		System.out.println(Log.profiles.get(1).getFirstName());
 
+		System.out.println("Mary's index is:");
+		
+		// testing the Log getters
+		// get by name
+		try{
+			int i = Log.getByName("Mary Scotts");
+			System.out.println(i);
+			Log.profiles.get(i).updateLastName("Smith");
+			System.out.println(Log.profiles.get(i).getLastName());
+		}
+
+		catch(NullPointerException e){
+			System.out.println("Person not in system!");
+		}
+
+		// get by id
+		try{
+			int i = Log.getByID(1);
+			System.out.println(i);
+			System.out.println(Log.profiles.get(i).getLastName());
+		}
+
+		catch(NullPointerException e){
+			System.out.println("Person not in system!");
+		}
 
 
 		// test Log class

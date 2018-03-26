@@ -12,8 +12,44 @@ public class Log{
 		profiles.add(personID);
 	}
 
-	// retrieve a profile by name
-	public static Person
+	// retrieve a profile's index by name
+	public static Integer getByName(String firstAndLastName) throws NullPointerException{
+		
+		Integer intIndex = null;
+		String fullName;
+	
+		for(int i=0; i < profiles.size(); i++){
+			
+			// full name = first name + last name
+			fullName = profiles.get(i).getFirstName() + " "
+					   + profiles.get(i).getLastName();
+			
+			// check if name is a match
+			if(fullName.equals(firstAndLastName)){
+				intIndex = i;
+				break;
+			}
+		}
+		return intIndex;
+	}
+
+	// retrieve a profile's index by ID
+	public static Integer getByID(int ID) throws NullPointerException{
+		
+		Integer intIndex = null;
+	
+		for(int i=0; i < profiles.size(); i++){
+			
+			int profileID = profiles.get(i).getID();
+			
+			// check if ID is a match
+			if(ID == profileID){
+				intIndex = i;
+				break;
+			}
+		}
+		return intIndex;
+	}
 
 
 	// retrieve a profile by ID
