@@ -51,16 +51,19 @@ public class Log{
 		return intIndex;
 	}
 
+	// print a list of a profile's friends
+	public static void printFriends(String fullName){
+		ArrayList<Integer> friends = new ArrayList<Integer>();
+		int arrayPosition;
 
-	// retrieve a profile by ID
+		// get the index value
+		//arrayPosition = getByName(fullName);
+		//friends = Log.profiles.get(arrayPosition).getFriends();
+
+	}
 
 
-
-
-
-
-
-
+	// generated pipe delimitered string of a profile
 	public static String adultProfileString(Adult p){
 
 		// get the type of object
