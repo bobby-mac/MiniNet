@@ -1,3 +1,11 @@
+/**
+* Person is the abstract class to create the attributes
+* for the profiles of the different type of people using MiniNet.
+*
+* @author  Angus Staines
+* @version 1.0
+*/
+
 import java.util.*;
 import java.time.LocalDate;
 import java.time.Period;
