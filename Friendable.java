@@ -8,5 +8,5 @@ public interface Friendable{
 // setters
 	public void addFriend(int friendID);
 	public void removeFriend(int friendID);
-	
+
 }

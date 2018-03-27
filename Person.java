@@ -1,26 +1,39 @@
 import java.util.*;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 
 public abstract class Person{
 	// variables
 	private String userFirstName;
 	private String userLastName;
-	// private ??? userImage;
+	private String userImage;
 	private String userStatus;
 	private int userAge;	// !!! should this be a class variable, or simply a function variable when the age is asked for? !!!
-	private String dob;
+	private LocalDate dob;
 	public static int PROFILE_COUNT = 0;   // static variable to use as counter for unique USER_ID
 	private final int USER_ID;
 	private String userPassword;
 
-	// constructor !!! need to update to include args (see class diagram)
-	Person(String firstName, String lastName, int age, String password){   // !!! encapsulation for abstract constructor !!!
+	// constructor for mandatory fields
+	public Person(String firstName, String lastName, LocalDate dob, String password){
 		userFirstName = firstName;
 		userLastName = lastName;
-		// this.dob = dob;
-		userAge = age;
+		this.dob = dob;
 		userPassword = password;
 		USER_ID = ++PROFILE_COUNT;   // increment PROFILE_COUNT and assign to USER_ID (first USER_ID = 1)
 	}
+
+	// constructor overloaded for image
+	public Person(String firstName, String lastName, LocalDate dob, String password, String image){
+		userFirstName = firstName;
+		userLastName = lastName;
+		this.dob = dob;
+		userPassword = password;
+		userImage = image;
+		USER_ID = ++PROFILE_COUNT;   // increment PROFILE_COUNT and assign to USER_ID (first USER_ID = 1)
+	}
+
 
 	// getters
 	public String getFirstName(){
@@ -31,20 +44,22 @@ public abstract class Person{
 		return userLastName;
 	}
 
-	public String getFullName() { // Simple helper to return full name
-		return userFirstName + " " + userLastName;
-	}
-
-	// public ??? getImage(){
-	//	return userImage;
-	// } 
+	public String getImage(){
+		return userImage;
+	} 
 
 	public String getStatus(){
 		return userStatus;
 	}
 
+	public String getDOB(){
+		DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+		String date = dob.format(dateFormatter);
+		return date;
+	}
+
 	public int getAge(){
-		// !!! need to calculate age. Take dob as arg (update class diagram accordingly)
+		updateAge();
 		return userAge;
 	}
 
@@ -52,7 +67,7 @@ public abstract class Person{
 		return USER_ID;
 	}
 
-	private String getPassword(){
+	public String getPassword(){
 		return userPassword;
 	}
 
@@ -76,23 +91,27 @@ public abstract class Person{
 
 	// setters
 
-	// receives args from Driver.inputName()
 	public void updateName(String firstName, String lastName){
 		userFirstName = firstName;
 		userLastName = lastName;
 	}
 
-	// !!! public void updateImage !!! ?????
+	public void updateImage(String image){
+		userImage = image;
+	}
 
-	// receives args from Driver.inputStatus()
 	public void updateStatus(String status){
 		userStatus = status;
 	}
 
-	// receives args from Driver.inputDOB()
-	public void updateDOB(String dateOfBirth){
+	public void updateDOB(LocalDate dateOfBirth){
 		dob = dateOfBirth;
-	}	
+	}
+
+	public void updateAge(){
+		Period yearsOld = Period.between(dob, LocalDate.now());
+		userAge = yearsOld.getYears();
+	}
 	
 	// receives args from Driver.inputPassword()
 	public void updatePassword(String newPassword){

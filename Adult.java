@@ -1,7 +1,5 @@
 import java.util.*;
-
-import Person;
-import Friendable;
+import java.time.LocalDate;
 
 public class Adult extends Person implements Friendable{
 
@@ -11,9 +9,14 @@ public class Adult extends Person implements Friendable{
 	private int partner; // !!! how to make this optional? Or doesn't matter if not used in every instance? !!!
 
 
-	// constructor
-	Adult(String firstName, String lastName, int age, String password){
-		super(firstName, lastName, age, password);
+	// constructor for mandatory fields
+	Adult(String firstName, String lastName, LocalDate dob, String password){
+		super(firstName, lastName, dob, password);
+	}
+
+	// overlaoded constructor to include image
+	Adult(String firstName, String lastName, LocalDate dob, String password, String image){
+		super(firstName, lastName, dob, password, image);
 	}
 
 	// getter
