@@ -26,12 +26,8 @@ public abstract class Person{
 
 	// constructor overloaded for image
 	public Person(String firstName, String lastName, LocalDate dob, String password, String image){
-		userFirstName = firstName;
-		userLastName = lastName;
-		this.dob = dob;
-		userPassword = password;
+		super(firstName, lastName, dob, password);
 		userImage = image;
-		USER_ID = ++PROFILE_COUNT;   // increment PROFILE_COUNT and assign to USER_ID (first USER_ID = 1)
 	}
 
 	// constructor for retrieving profile (USER_ID is given as an arg, rather than created by the constructor)
