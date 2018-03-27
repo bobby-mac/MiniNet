@@ -26,7 +26,7 @@ public abstract class Person{
 
 	// constructor overloaded for image
 	public Person(String firstName, String lastName, LocalDate dob, String password, String image){
-		super(firstName, lastName, dob, password);
+		this(firstName, lastName, dob, password);
 		userImage = image;
 	}
 
