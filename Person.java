@@ -34,6 +34,17 @@ public abstract class Person{
 		USER_ID = ++PROFILE_COUNT;   // increment PROFILE_COUNT and assign to USER_ID (first USER_ID = 1)
 	}
 
+	// constructor for retrieving profile (USER_ID is given as an arg, rather than created by the constructor)
+	public Person(int ID, String firstName, String lastName, LocalDate dob, String password, String image, String status){
+		USER_ID = ID;
+		userFirstName = firstName;
+		userLastName = lastName;
+		this.dob = dob;
+		userPassword = password;
+		userImage = image;
+		userStatus = status;
+	}
+
 
 	// getters
 	public String getFirstName(){
@@ -96,9 +107,12 @@ public abstract class Person{
 
 	// setters
 
-	public void updateName(String firstName, String lastName){
+	public void updateFirstName(String firstName){
 		userFirstName = firstName;
-		userLastName = lastName;
+	}
+
+	public void updateLastName(String lastName){
+	userLastName = lastName;
 	}
 
 	public void updateImage(String image){

@@ -15,6 +15,13 @@ public class Infant extends Person implements Dependent{
 		super(firstName, lastName, dob, password, image);
 		this.parents = parents;
 	}
+
+	// constructor for retrieving profile (USER_ID is given as an arg, rather than created by the constructor)
+	public Infant(int ID, String firstName, String lastName, LocalDate dob, String password, String image, String status, 
+				 int[] parents){
+		super(ID, firstName, lastName, dob, password, image, status);
+		this.parents = parents;
+	}
 	// override Dependent getter
 	public int[] getParents(){
 		return parents;

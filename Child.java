@@ -18,6 +18,14 @@ public class Child extends Person implements Friendable, Dependent{
 	this.parents = parents;
 	}
 
+	// constructor for retrieving profile (USER_ID is given as an arg, rather than created by the constructor)
+	public Child(int ID, String firstName, String lastName, LocalDate dob, String password, String image, String status, 
+				 int[] parents, ArrayList<Integer> friends){
+		super(ID, firstName, lastName, dob, password, image, status);
+		this.parents = parents;
+		this.friends = friends;
+	}
+
 	// override Frienable getter
 	public ArrayList getFriends(){
 		return friends;
