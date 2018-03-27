@@ -21,7 +21,7 @@ public abstract class Person{
 		userLastName = lastName;
 		this.dob = dob;
 		userPassword = password;
-		USER_ID = ++PROFILE_COUNT;   // increment PROFILE_COUNT and assign to USER_ID (first USER_ID = 1)
+		USER_ID = PROFILE_COUNT++;   // increment PROFILE_COUNT and assign to USER_ID (first USER_ID = 0)
 	}
 
 	// constructor overloaded for image

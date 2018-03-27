@@ -18,7 +18,7 @@ public class Driver {
     }
 
     public static void start(ArrayList<Person> loadedPeople) {
-        people = loadedPeople;
+        people = Log.getPeople();
 
         while(startMenu());
 
@@ -63,7 +63,7 @@ public class Driver {
                 break;
             case 2:
                 System.out.println("Printing People List");
-                printUsers(Log.getPeople(), false);
+                printUsers(people, false);
 
                 System.out.println("Select a user ID: ");
                 int selectedUserId = getMenuInput();
@@ -114,7 +114,7 @@ public class Driver {
                 } else {
                     Adult newFriend = (Adult)people.get(selectedFriendId);
                     Adult tempAdult = (Adult) selectedPerson;
-                    tempAdult.addFriend(newFriend);
+                    // tempAdult.addFriend(newFriend);
                 }
 
                 break;
