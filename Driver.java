@@ -105,7 +105,7 @@ public class Driver {
         System.out.println("3. List friends");
 
         if (selectedPerson instanceof Adult) { 
-            System.out.println("4. List Dependents")
+            System.out.println("4. List Dependents");
         } else {
             System.out.println("4. List Parents");
         }
@@ -160,7 +160,8 @@ public class Driver {
                 printUsersFromId(tempAdult.getFriends(), true);
                 return true;
             case 4:
-                
+                if()
+                return true;
             case 5:
                 removeFriends(selectedPerson);
                 int personId = Log.getByID(selectedPerson.getID());
@@ -270,6 +271,12 @@ public class Driver {
                         p2.addPartner(parent1); 
                         // Add dependents after user has been created
 
+                        Person p = new Child(firstName, lastName, userDate, "password", new int[]{parent1, parent2}, imageURL, status );
+                        Log.addProfile(p);
+
+                        p1.addDependent(p.getID());
+                        p2.addDependent(p.getID());
+
                         hasvalidParents = true;
                     } catch (Exception e) {
                         System.out.println("Invalid user selection! Users don't exist or aren't Adults");
@@ -277,9 +284,6 @@ public class Driver {
                 }
 
             } while (!hasvalidParents);
-
-            Person p = new Child(firstName, lastName, userDate, "password", new int[]{parent1, parent2}, imageURL, status );
-            Log.addProfile(p);
         } else {
             Person p = new Adult(firstName, lastName, userDate, "password", imageURL, status);
             Log.addProfile(p);
