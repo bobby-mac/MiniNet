@@ -19,6 +19,10 @@ public class Adult extends Person implements Friendable{
 		super(firstName, lastName, dob, password, image);
 	}
 
+	Adult(String firstName, String lastName, LocalDate dob, String password, String image, String status){
+		super(firstName, lastName, dob, password, image, status);
+	}
+
 	// constructor for retrieving profile (USER_ID is given as an arg, rather than created by the constructor)
 	Adult(int ID, String firstName, String lastName, LocalDate dob, String password, String image, 
 		  String status, ArrayList<Integer> friends, ArrayList<Integer> dependents, int partner){

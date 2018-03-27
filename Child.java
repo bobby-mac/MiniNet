@@ -14,8 +14,13 @@ public class Child extends Person implements Friendable, Dependent{
 
 	// overloading constructor to include image
 	Child(String firstName, String lastName, LocalDate dob, String password, int[] parents, String image){
-	super(firstName, lastName, dob, password, image);
-	this.parents = parents;
+		super(firstName, lastName, dob, password, image);
+		this.parents = parents;
+	}
+
+	Child(String firstName, String lastName, LocalDate dob, String password, int[] parents, String image, String status){
+		super(firstName, lastName, dob, password, image, status);
+		this.parents = parents;
 	}
 
 	// constructor for retrieving profile (USER_ID is given as an arg, rather than created by the constructor)
