@@ -67,6 +67,7 @@ public class Driver {
 
                 System.out.println("Select a user ID: ");
                 int selectedUserId = getMenuInput();
+
                 if(selectedUserId < 0) {
                     System.out.println("Please select a valid user ID");
                 } else {
@@ -85,7 +86,12 @@ public class Driver {
     }
 
     private static Boolean selectedPersonMenu(int userId) {
-        selectedPerson = people.get(userId);
+        try {
+            selectedPerson = people.get(Log.getByID(userId));
+        } catch (NullPointerException e) {
+            System.out.println("No user with that ID exists");
+            return false;
+        }
 
         System.out.println("Selected Person: " + selectedPerson.getFullName() + "\n");
 
@@ -93,6 +99,7 @@ public class Driver {
         System.out.println("1. Print full user details");
         System.out.println("2. Add a friend");
         System.out.println("3. List friends");
+        System.out.println("4. Remove User");
         System.out.println("0. Go Back");
 
         int selection = getMenuInput();
@@ -112,18 +119,43 @@ public class Driver {
                 if(selectedFriendId < 0) {
                     System.out.println("Please select a valid user ID");
                 } else {
-                    Adult newFriend = (Adult)people.get(selectedFriendId);
-                    Adult tempAdult = (Adult) selectedPerson;
-                    tempAdult.addFriend(newFriend.getID());
+                    // Adult tempAdult = (Adult) selectedPerson;
+
+                    try {
+                        Person tempPerson = people.get(Log.getByID(selectedFriendId));
+
+                        if(tempPerson instanceof Adult && selectedPerson instanceof Adult) {
+                            Adult currentPerson = (Adult) selectedPerson;
+                            Adult newFriend = (Adult)tempPerson;
+
+                            currentPerson.addFriend(newFriend.getID());
+                            newFriend.addFriend(currentPerson.getID());
+                        } else if(tempPerson instanceof Child && selectedPerson instanceof Child) {
+                            Adult currentPerson = (Adult) selectedPerson;
+                            Adult newFriend = (Adult)tempPerson;
+
+                            currentPerson.addFriend(newFriend.getID());
+                            newFriend.addFriend(currentPerson.getID());
+                        } else {
+                            System.out.println("Users must of same type to be friends");
+                        }
+                    } catch (NullPointerException e) {
+                        System.out.println("No user with that ID exists");
+                        return false;
+                    }
                 }
 
                 break;
             case 3:
-                System.out.println("TODO - Print list of users friends");
                 Adult tempAdult = (Adult) selectedPerson;
-                printUsers(tempAdult.getFriends(), true);
-                // printUsers(selectedPerson.getFriends()); // TODO - implement getFriends();
+                printUsersFromId(tempAdult.getFriends(), true);
                 return true;
+            case 4:
+                removeFriends(selectedPerson);
+                int personId = Log.getByID(selectedPerson.getID());
+                people.remove(personId);
+                System.out.println(); // Print empty line for readability
+                return false;
             case 0:
                 System.out.println(); // Print empty line for readability
                 return false;
@@ -183,11 +215,9 @@ public class Driver {
             "Age"
         );
 
-        
-
         // TODO - make this more robust for displaying large lists
-        for (Person person: peopleList) {
-            printUser(person, fullDetails);
+        for (Integer personId: peopleList) {
+            printUser(people.get(Log.getByID(personId)), fullDetails);
         }
     }
 
@@ -227,11 +257,40 @@ public class Driver {
 
         printUsers(filteredPeople, false);
     }
+
+    private static void removeFriends(Person selectedPerson) {
+        int selectedPersonId = selectedPerson.getID();
+        ArrayList<Integer> friendsList = null;
+        if (selectedPerson instanceof Adult) {
+            Adult castPerson = (Adult)selectedPerson;
+            friendsList = castPerson.getFriends();
+        } else if (selectedPerson instanceof Child) {
+            Child castPerson = (Child)selectedPerson;
+            friendsList = castPerson.getFriends();
+        } else {
+            System.out.println("Can't remove friends from this user type");
+            return;
+        }
+
+        for(Integer friendId: friendsList) {
+            Person oldFriend = people.get(Log.getByID(friendId));
+
+            if (oldFriend instanceof Adult) {
+                Adult castPerson = (Adult)oldFriend;
+                castPerson.removeFriend(selectedPersonId);
+            } else if (oldFriend instanceof Child) {
+                Child castPerson = (Child)oldFriend;
+                castPerson.removeFriend(selectedPersonId);
+            } else {
+                System.out.println("Can't remove friends from this user type");
+                Person castPerson = null;
+            }
+
+        }
+    }
 }
 
 /*
-! Select a person by name
-! Display the profile of the selected person
 ! Update the profile information of the selected person
 ! Delete the selected person
 ! Connect two persons in a meaningful way e.g. friend, parent
