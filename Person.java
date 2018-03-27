@@ -38,6 +38,12 @@ public abstract class Person{
 		userImage = image;
 	}
 
+	// constructor overloaded for status
+	public Person(String firstName, String lastName, LocalDate dob, String password, String image, String status){
+		this(firstName, lastName, dob, password, image);
+		this.userStatus = status;
+	}
+
 	// constructor for retrieving profile (USER_ID is given as an arg, rather than created by the constructor)
 	public Person(int ID, String firstName, String lastName, LocalDate dob, String password, String image, String status){
 		USER_ID = ID;
