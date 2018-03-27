@@ -114,7 +114,7 @@ public class Driver {
                 } else {
                     Adult newFriend = (Adult)people.get(selectedFriendId);
                     Adult tempAdult = (Adult) selectedPerson;
-                    // tempAdult.addFriend(newFriend);
+                    tempAdult.addFriend(newFriend.getID());
                 }
 
                 break;

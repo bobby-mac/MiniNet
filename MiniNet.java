@@ -18,17 +18,16 @@ public class MiniNet {
     public static void main(String args[]){
         String filename = "./miniNet.dat";
         String line = "";
-
+        
         // Read initial data file to load network
         try {
             FileReader fileReader = 
                 new FileReader(filename);
 
-            BufferedReader bufferedReader = 
+                BufferedReader bufferedReader = 
                 new BufferedReader(fileReader);
 
             while((line = bufferedReader.readLine()) != null) {
-                // TODO - Create Person object for each line in datafile
                 String[] personData = line.split(";");
                 Person p = null;
 
@@ -61,10 +60,10 @@ public class MiniNet {
                 }
 
                 Log.addProfile(p);
-            }   
+            }
 
-            bufferedReader.close();         
-            
+            bufferedReader.close();
+
         } catch(FileNotFoundException ex) {
             System.out.println(
                 "No data file to open for '" + 
