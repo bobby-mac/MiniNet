@@ -90,11 +90,19 @@ public class Driver {
     }
 
     private static Boolean selectedPersonMenu(int userId) {
+        Adult tempAdult = null;
+        Child tempChild = null;
         try {
             selectedPerson = people.get(Log.getByID(userId));
         } catch (NullPointerException e) {
             System.out.println("No user with that ID exists");
             return false;
+        }
+
+        if(selectedPerson instanceof Adult) {
+            tempAdult = (Adult)selectedPerson;
+        } else {
+            tempChild = (Child)selectedPerson;
         }
 
         System.out.println("Selected Person: " + selectedPerson.getFullName() + "\n");
@@ -156,11 +164,23 @@ public class Driver {
 
                 break;
             case 3:
-                Adult tempAdult = (Adult) selectedPerson;
+                tempAdult = (Adult) selectedPerson;
                 printUsersFromId(tempAdult.getFriends(), true);
                 return true;
             case 4:
-                if()
+                if(selectedPerson instanceof Adult) {
+                    System.out.println("Dependents");
+                    System.out.println("******************");
+                    
+                    tempAdult = (Adult)selectedPerson;
+                    printUsersFromId(tempAdult.getDependents(), true);
+                } else {
+                    System.out.println("Parents");
+                    System.out.println("******************");
+
+                    tempChild = (Child)selectedPerson;
+                    printUsersFromId(tempChild.getParents(), true);
+                }
                 return true;
             case 5:
                 removeFriends(selectedPerson);
@@ -305,6 +325,17 @@ public class Driver {
         for (Person person: peopleList) {
             printUser(person, fullDetails);
         }
+    }
+
+    // Helper to convert int[] array to Array list
+    private static void printUsersFromId(int[] peopleList, Boolean fullDetails) {
+        ArrayList<Integer> people = new ArrayList<Integer>();
+
+        for (int i = 0; i < peopleList.length; i++) {
+            people.add(peopleList[i]);
+        }
+
+        printUsersFromId(people, true);
     }
 
     private static void printUsersFromId(ArrayList<Integer> peopleList, Boolean fullDetails) {
