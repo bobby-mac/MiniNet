@@ -44,6 +44,11 @@ public abstract class Person{
 		return userLastName;
 	}
 
+	// Helper method
+	public String getFullName() {
+		return userFirstName + " " + userLastName;
+	}
+
 	public String getImage(){
 		return userImage;
 	} 
