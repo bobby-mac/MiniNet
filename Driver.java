@@ -130,43 +130,32 @@ public class Driver {
             case 2:
                 System.out.println("Select a friend to add");
 
-                printUsersWithFilter(people, "Adult");
+                if(selectedPerson instanceof Adult) {
+                    printUsersWithFilter(people, "Adult");
 
-                System.out.println("Select a user ID: ");
-                int selectedFriendId = getMenuInput();
-                
-                if(selectedFriendId < 0) {
-                    System.out.println("Please select a valid user ID");
+                    System.out.println("Select a user ID: ");
+                    int selectedFriendId = getMenuInput();
+                    
+                    addNewFriend(selectedFriendId);
                 } else {
-                    try {
-                        Person tempPerson = people.get(Log.getByID(selectedFriendId));
+                    printUsersWithFilter(people, "Child");
 
-                        if(tempPerson instanceof Adult && selectedPerson instanceof Adult) {
-                            Adult currentPerson = (Adult) selectedPerson;
-                            Adult newFriend = (Adult)tempPerson;
-
-                            currentPerson.addFriend(newFriend.getID());
-                            newFriend.addFriend(currentPerson.getID());
-                        } else if(tempPerson instanceof Child && selectedPerson instanceof Child) {
-                            Adult currentPerson = (Adult) selectedPerson;
-                            Adult newFriend = (Adult)tempPerson;
-
-                            currentPerson.addFriend(newFriend.getID());
-                            newFriend.addFriend(currentPerson.getID());
-                        } else {
-                            System.out.println("Users must of same type to be friends");
-                        }
-                    } catch (NullPointerException e) {
-                        System.out.println("No user with that ID exists");
-                        return false;
-                    }
+                    System.out.println("Select a user ID: ");
+                    int selectedFriendId = getMenuInput();
+                    
+                    addNewFriend(selectedFriendId);
                 }
 
                 break;
             case 3:
-                tempAdult = (Adult) selectedPerson;
-                printUsersFromId(tempAdult.getFriends(), true);
+                // tempAdult = (Adult) selectedPerson;
+                if(selectedPerson instanceof Adult) {
+                    printUsersFromId(tempAdult.getFriends(), true);
+                } else {
+                    printUsersFromId(tempChild.getFriends(), true);
+                }
                 return true;
+
             case 4:
                 if(selectedPerson instanceof Adult) {
                     System.out.println("Dependents");
@@ -196,6 +185,42 @@ public class Driver {
         }
 
         return true;
+    }
+
+    private static Boolean addNewFriend(int selectedFriendId) {
+        if(selectedFriendId < 0) {
+            System.out.println("Please select a valid user ID");
+            return false;
+        } else {
+            try {
+                Person tempPerson = people.get(Log.getByID(selectedFriendId));
+
+                if(tempPerson instanceof Adult && selectedPerson instanceof Adult) {
+                    Adult currentPerson = (Adult) selectedPerson;
+                    Adult newFriend = (Adult)tempPerson;
+
+                    currentPerson.addFriend(newFriend.getID());
+                    newFriend.addFriend(currentPerson.getID());
+                } else if(tempPerson instanceof Child && selectedPerson instanceof Child) {
+                    Child currentPerson = (Child) selectedPerson;
+                    Child newFriend = (Child)tempPerson;
+
+                    if(Math.abs(currentPerson.getAge() - newFriend.getAge()) < 3) { 
+                        //Children can't be friends if they are more than 3 years apart
+                        currentPerson.addFriend(newFriend.getID());
+                        newFriend.addFriend(currentPerson.getID());
+                    } else {
+                        System.out.println("Users age difference is too high");
+                    }
+                } else {
+                    System.out.println("Users must of same type to be friends");
+                }
+            } catch (NullPointerException e) {
+                System.out.println("No user with that ID exists");
+            } finally {
+                return false;
+            }
+        }
     }
 
     private static String getDOBInput(String prompt) {
@@ -379,10 +404,17 @@ public class Driver {
     private static void printUsersWithFilter(ArrayList<Person> people, String filter) {
         ArrayList<Person> filteredPeople = new ArrayList<Person>();
 
-        // TODO - find way to check class type against a string? Probably use a hashmap of classes?
+        System.out.println("filter is: " + filter);
+
         for(Person person: people) {
             if(person instanceof Adult) {
-                filteredPeople.add(person);
+                if(filter.equals("Adult")) {
+                    filteredPeople.add(person);
+                }
+            } else {
+                if (filter.equals("Child")) {
+                    filteredPeople.add(person);
+                }
             }
         }
 
