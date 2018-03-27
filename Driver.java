@@ -61,11 +61,11 @@ public class Driver {
                 break;
             case 2:
                 System.out.println("Printing People List");
-                printUsers(people);
+                printUsers(people, false);
 
                 System.out.println("Select a user ID: ");
                 int selectedUserId = getMenuInput();
-                if(selectedUserId < 1) {
+                if(selectedUserId < 0) {
                     System.out.println("Please select a valid user ID");
                 } else {
                     while(selectedPersonMenu(selectedUserId));
@@ -100,14 +100,28 @@ public class Driver {
                 printUser(selectedPerson, true);
                 break;
             case 2:
-                System.out.println("TODO - Add Friend");
-                // TODO - addFriend method
+                System.out.println("Select a friend to add");
+
+                printUsersWithFilter(people, "Adult");
+
+                System.out.println("Select a user ID: ");
+                int selectedFriendId = getMenuInput();
+                
+                if(selectedFriendId < 0) {
+                    System.out.println("Please select a valid user ID");
+                } else {
+                    Adult newFriend = (Adult)people.get(selectedFriendId);
+                    Adult tempAdult = (Adult) selectedPerson;
+                    tempAdult.addFriend(newFriend);
+                }
+
                 break;
             case 3:
                 System.out.println("TODO - Print list of users friends");
+                Adult tempAdult = (Adult) selectedPerson;
+                printUsers(tempAdult.getFriends(), true);
                 // printUsers(selectedPerson.getFriends()); // TODO - implement getFriends();
                 return true;
-                break;
             case 0:
                 System.out.println(); // Print empty line for readability
                 return false;
@@ -145,7 +159,7 @@ public class Driver {
         // TODO - create Person and add to Array
     }
 
-    private static void printUsers(ArrayList<Person> peopleList) {
+    private static void printUsers(ArrayList<Person> peopleList, Boolean fullDetails) {
         System.out.format(
             "%4s%20s%4s\n",
             "User ID",
@@ -154,7 +168,7 @@ public class Driver {
         );
         // TODO - make this more robust for displaying large lists
         for (Person person: peopleList) {
-            printUser(person, true);
+            printUser(person, fullDetails);
         }
     }
 
@@ -180,8 +194,19 @@ public class Driver {
                 person.getAge()
             );
         }
-                
+    }
 
+    private static void printUsersWithFilter(ArrayList<Person> people, String filter) {
+        ArrayList<Person> filteredPeople = new ArrayList<Person>();
+
+        // TODO - find way to check class type against a string? Probably use a hashmap of classes?
+        for(Person person: people) {
+            if(person instanceof Adult) {
+                filteredPeople.add(person);
+            }
+        }
+
+        printUsers(filteredPeople, false);
     }
 }
 

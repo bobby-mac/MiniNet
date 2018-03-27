@@ -59,6 +59,7 @@ public class MiniNet {
             }   
 
             bufferedReader.close();         
+            
         } catch(FileNotFoundException ex) {
             System.out.println(
                 "No data file to open for '" + 
