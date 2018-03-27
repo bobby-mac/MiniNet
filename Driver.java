@@ -161,6 +161,7 @@ public class Driver {
         // TODO - create Person and add to Array
     }
 
+    // Print users from a list of Person objects
     private static void printUsers(ArrayList<Person> peopleList, Boolean fullDetails) {
         System.out.format(
             "%4s%20s%4s\n",
@@ -168,6 +169,22 @@ public class Driver {
             "User Name",
             "Age"
         );
+        // TODO - make this more robust for displaying large lists
+        for (Person person: peopleList) {
+            printUser(person, fullDetails);
+        }
+    }
+
+    private static void printUsersFromId(ArrayList<Integer> peopleList, Boolean fullDetails) {
+        System.out.format(
+            "%4s%20s%4s\n",
+            "User ID",
+            "User Name",
+            "Age"
+        );
+
+        
+
         // TODO - make this more robust for displaying large lists
         for (Person person: peopleList) {
             printUser(person, fullDetails);
