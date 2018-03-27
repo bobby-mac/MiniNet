@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import java.io.*;
 
@@ -8,6 +10,7 @@ import Person;
 import Adult;
 import Child;
 import Infant;
+import Log;
 
 public class MiniNet {
     private static ArrayList<Person> people = new ArrayList<Person>();
@@ -29,12 +32,14 @@ public class MiniNet {
                 String[] personData = line.split(";");
                 Person p = null;
 
+                LocalDate date1 = LocalDate.parse(personData[3], DateTimeFormatter.BASIC_ISO_DATE);
+
                 switch (personData[0]) {
                     case "adult":
                         p = new Adult(
                             personData[1], // First Name
                             personData[2], // Last Name
-                            Integer.parseInt(personData[3]), // Age
+                            date1, //DOB
                             "password" // Password
                         );
                         break;
@@ -42,7 +47,7 @@ public class MiniNet {
                         p = new Child(
                             personData[1], // First Name
                             personData[2], // Last Name
-                            Integer.parseInt(personData[3]), // Age
+                            date1, //DOB
                             "password", // Password
                             new int[] {
                                 Integer.parseInt(personData[4]), 
@@ -55,7 +60,7 @@ public class MiniNet {
 
                 }
 
-                people.add(p);
+                Log.addProfile(p);
             }   
 
             bufferedReader.close();         

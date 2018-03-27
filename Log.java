@@ -12,8 +12,12 @@ public class Log{
 		profiles.add(personID);
 	}
 
+	public static ArrayList<Person> getPeople() {
+		return profiles;
+	}
+
 	// retrieve a profile by name
-	public static Person
+	// public static Person
 
 
 	// retrieve a profile by ID

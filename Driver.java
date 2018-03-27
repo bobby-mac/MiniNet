@@ -6,6 +6,8 @@ import Adult;
 import Child;
 import Infant;
 
+import Log;
+
 public class Driver {
     private static Scanner input = new Scanner(System.in);
     private static ArrayList<Person> people = new ArrayList<Person>();
@@ -61,7 +63,7 @@ public class Driver {
                 break;
             case 2:
                 System.out.println("Printing People List");
-                printUsers(people, false);
+                printUsers(Log.getPeople(), false);
 
                 System.out.println("Select a user ID: ");
                 int selectedUserId = getMenuInput();
