@@ -12,6 +12,7 @@ public class Log{
 		profiles.add(personID);
 	}
 
+<<<<<<< HEAD
 	// retrieve a profile's index by name
 	public static Integer getByName(String firstAndLastName) throws NullPointerException{
 		
@@ -32,6 +33,19 @@ public class Log{
 		}
 		return intIndex;
 	}
+=======
+	public static ArrayList<Person> getPeople() {
+		return profiles;
+	}
+
+	// retrieve a profile by name
+	// public static Person
+
+
+	// retrieve a profile by ID
+
+
+>>>>>>> d72bbc03c01fcedd7f4acf73c46548e97191924e
 
 	// retrieve a profile's index by ID
 	public static Integer getByID(int ID) throws NullPointerException{
