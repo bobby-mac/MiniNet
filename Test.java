@@ -56,6 +56,9 @@ public class Test{
 			System.out.println("Person not in system!");
 		}
 
+		// display a profile by entering a name
+		
+
 
 		// test Log class
 		//System.out.println(Log.adultProfileString(test3));
