@@ -45,4 +45,15 @@ public class Child extends Person implements Friendable, Dependent{
 		friends.remove(Integer.valueOf(friendID));
 	}
 
+	public boolean isFriend(int  friendID){
+		boolean boolFriend;
+		if (friends.contains(friendID)){
+			boolFriend = true;
+		}
+		else {
+			boolFriend = false;
+		}
+		return boolFriend;
+	}
+
 }

@@ -60,4 +60,15 @@ public class Adult extends Person implements Friendable{
 		friends.remove(Integer.valueOf(friendID));
 	}
 
+	public boolean isFriend(int  friendID){
+		boolean boolFriend;
+		if (friends.contains(friendID)){
+			boolFriend = true;
+		}
+		else {
+			boolFriend = false;
+		}
+		return boolFriend;
+	}
+
 }
