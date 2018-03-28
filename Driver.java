@@ -1,16 +1,16 @@
+/**
+* Driver
+*
+* @author  Robert McLoughlin
+* @version 1.0
+*/
+
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.Period;
-
-import Person;
-import Adult;
-import Child;
-import Infant;
-
-import Log;
 
 public class Driver {
     private static Scanner input = new Scanner(System.in);
@@ -27,7 +27,6 @@ public class Driver {
         while(startMenu());
 
         end();
-
 
     }
 
@@ -89,6 +88,7 @@ public class Driver {
         return true;
     }
 
+    @SuppressWarnings("unchecked")  // to supress warnings relating to the casting of tempAdult and tempChild (which this method handles using 'if... instanceof')
     private static Boolean selectedPersonMenu(int userId) {
         Adult tempAdult = null;
         Child tempChild = null;
@@ -213,7 +213,7 @@ public class Driver {
                         System.out.println("Users age difference is too high");
                     }
                 } else {
-                    System.out.println("Users must of same type to be friends");
+                    System.out.println("Users must be of same type to be friends");
                 }
             } catch (NullPointerException e) {
                 System.out.println("No user with that ID exists");
@@ -365,7 +365,7 @@ public class Driver {
 
     private static void printUsersFromId(ArrayList<Integer> peopleList, Boolean fullDetails) {
         System.out.format(
-            "%4s%20s%4s\n",
+            //"%4s%20s%4s\n",
             "User ID",
             "User Name",
             "Age"
@@ -421,6 +421,7 @@ public class Driver {
         printUsers(filteredPeople, false);
     }
 
+    @SuppressWarnings("unchecked")  // to supress warnings relating to the casting of tempAdult and tempChild (which this method handles using 'if... instanceof')
     private static void removeFriends(Person selectedPerson) {
         int selectedPersonId = selectedPerson.getID();
         ArrayList<Integer> friendsList = null;

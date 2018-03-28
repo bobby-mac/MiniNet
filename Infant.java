@@ -1,3 +1,11 @@
+/**
+* Infant is a concrete class that extends Person and implements Dependent.
+* Contains attributes and methods for parents.
+*
+* @author  Angus Staines
+* @version 1.0
+*/
+
 import java.time.LocalDate;
 
 public class Infant extends Person implements Dependent{
@@ -22,7 +30,7 @@ public class Infant extends Person implements Dependent{
 		super(ID, firstName, lastName, dob, password, image, status);
 		this.parents = parents;
 	}
-	// override Dependent getter
+	// override Dependent getter. Returns an array of parent's IDs.
 	public int[] getParents(){
 		return parents;
 	}

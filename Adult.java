@@ -1,3 +1,11 @@
+/**
+* Adult is a concrete class that extends Person and implements Friendable.
+* Contains attributes and methods for friends, dependents (children) and a partner.
+*
+* @author  Angus Staines
+* @version 1.0
+*/
+
 import java.util.*;
 import java.time.LocalDate;
 
@@ -19,6 +27,7 @@ public class Adult extends Person implements Friendable{
 		super(firstName, lastName, dob, password, image);
 	}
 
+	// overlaoded constructor to include status
 	Adult(String firstName, String lastName, LocalDate dob, String password, String image, String status){
 		super(firstName, lastName, dob, password, image, status);
 	}
@@ -46,25 +55,8 @@ public class Adult extends Person implements Friendable{
 		return friends;
 	}
 
-	// settters
-	public void addDependent(int dependentID){	// !!! should check if already in the list before adding
-		dependents.add(dependentID);
-	}
-
-	public void addPartner(int partnerID){	
-	partner = partnerID;
-	}
-
-	// override interface setters
-	public void addFriend(int friendID){	// !!! should check if already in the list before adding
-		friends.add(friendID);
-	}
-
-	public void removeFriend(int friendID){
-		friends.remove(Integer.valueOf(friendID));
-	}
-
-	public boolean isFriend(int  friendID){
+	// returns True if a given ID is in the list of friends. Otherwise returns False.
+	public boolean isFriend(int friendID){
 		boolean boolFriend;
 		if (friends.contains(friendID)){
 			boolFriend = true;
@@ -74,5 +66,31 @@ public class Adult extends Person implements Friendable{
 		}
 		return boolFriend;
 	}
+
+	// settters
+	public void addDependent(int dependentID){	// TODO: should check if already in the list before adding (similar to addFriend)
+		dependents.add(dependentID);
+	}
+
+	public void addPartner(int partnerID){	
+	partner = partnerID;
+	}
+
+	// override interface setters
+	public void addFriend(int friendID){	// TODO: print to console could be handled in Driver by throwing an exception
+		if (isFriend(friendID)){
+			System.out.println("This person is already your friend.");
+		}
+		else friends.add(friendID);
+	}
+
+	public void removeFriend(int friendID){	// TODO: print to console could be handled in Driver by throwing an exception
+		if (!isFriend(friendID)){
+			System.out.println("This person is not an existing friend.");
+		}
+		else friends.remove(Integer.valueOf(friendID));
+	}
+
+
 
 }

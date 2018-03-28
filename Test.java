@@ -1,3 +1,10 @@
+/**
+* Contains various tests. Discard this class.
+*
+* @author  Angus Staines
+* @version 1.0
+*/
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -20,6 +27,14 @@ public class Test{
 		
 		test3.addFriend(test1.getID());
 		test3.addFriend(test2.getID());
+		// adding a friend that already exists:
+		test3.addFriend(test1.getID());
+
+		// remove friend
+		test3.removeFriend(test1.getID());
+
+		// remove friend who is not in list
+		test3.removeFriend(test1.getID());
 
 		Log.addProfile(test1);
 		Log.addProfile(test2);
@@ -39,6 +54,7 @@ public class Test{
 			System.out.println(i);
 			Log.profiles.get(i).updateLastName("Smith");
 			System.out.println(Log.profiles.get(i).getLastName());
+
 		}
 
 		catch(NullPointerException e){
@@ -47,7 +63,7 @@ public class Test{
 
 		// get by id
 		try{
-			int i = Log.getByID(1);
+			int i = Log.getByID(0);
 			System.out.println(i);
 			System.out.println(Log.profiles.get(i).getLastName());
 		}

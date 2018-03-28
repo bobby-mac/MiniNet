@@ -1,16 +1,16 @@
+/**
+* MiniNet
+*
+* @author  Robert McLoughlin
+* @version 1.0
+*/
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
 import java.io.*;
 
-import Driver;
-import Person;
-import Adult;
-import Child;
-import Infant;
-import Log;
 
 public class MiniNet {
     private static ArrayList<Person> people = new ArrayList<Person>();

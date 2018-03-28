@@ -17,9 +17,9 @@ public abstract class Person{
 	private String userLastName;
 	private String userImage;
 	private String userStatus;
-	private int userAge;	// !!! should this be a class variable, or simply a function variable when the age is asked for? !!!
+	private int userAge;
 	private LocalDate dob;
-	public static int PROFILE_COUNT = 0;   // static variable to use as counter for unique USER_ID
+	public static int profile_count = 0;   // static variable to use as counter for unique USER_ID
 	private final int USER_ID;
 	private String userPassword;
 
@@ -29,7 +29,7 @@ public abstract class Person{
 		userLastName = lastName;
 		this.dob = dob;
 		userPassword = password;
-		USER_ID = PROFILE_COUNT++;   // increment PROFILE_COUNT and assign to USER_ID (first USER_ID = 0)
+		USER_ID = profile_count++;   // increment profile_count and assign to USER_ID (first USER_ID = 0)
 	}
 
 	// constructor overloaded for image
@@ -57,6 +57,7 @@ public abstract class Person{
 
 
 	// getters
+
 	public String getFirstName(){
 		return userFirstName;
 	}
@@ -97,10 +98,10 @@ public abstract class Person{
 		return userPassword;
 	}
 
-
+	// check a given password against the object's password
 	public boolean checkPassword(String givenPassword){
 		// if the password doesn't match, ask to enter again or return 'false'.
-		// !!! the input print and input section of this needs to be moved to Driver (or a new View class) !!!
+		// TODO: the input/output section of this should be moved to Driver (or a new View class).
 		if (!(givenPassword.equals(getPassword()))){
 			System.out.println("Incorrect password.");
 			System.out.println("Please re-enter password or press enter to go back to the main menu");
@@ -142,7 +143,6 @@ public abstract class Person{
 		userAge = yearsOld.getYears();
 	}
 	
-	// receives args from Driver.inputPassword()
 	public void updatePassword(String newPassword){
 		userPassword = newPassword;
 	}
