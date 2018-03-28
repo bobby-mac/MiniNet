@@ -1,5 +1,10 @@
 /**
-* Driver
+* Driver contains the business rules that connect the MiniNet together
+* This handles:
+* - Menu generation, printing and user input for selection
+* - User creation and addition to the network, as well as removal
+* - Logic for connecting people within the network
+* - Display of details for users within the network
 *
 * @author  Robert McLoughlin
 * @version 1.0

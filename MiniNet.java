@@ -1,6 +1,8 @@
 /**
-* MiniNet
-*
+* MiniNet class sets up and tears down the network ready for use
+* by the driver class. Reads from a plain text data file to generate
+* users and their relevant connections
+* 
 * @author  Robert McLoughlin
 * @version 1.0
 */
